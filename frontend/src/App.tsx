@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 import './App.css';
 
 function App() {
   const [serverTime, setServerTime] = useState<number | null>(null);
   const [timeDifference, setTimeDifference] = useState<number>(0);
-  const [loadingTime, setLoadingTime] = useState<boolean>(false);
+  const [loadingTime, setLoadingTime] = useState<boolean>(true);
   const [metrics, setMetrics] = useState<string>('');
-  const [loadingMetrics, setLoadingMetrics] = useState<boolean>(false);
+  const [loadingMetrics, setLoadingMetrics] = useState<boolean>(true);
 
   useEffect(() => {
     fetchServerTime();
@@ -29,7 +30,7 @@ function App() {
   }, []);
 
   const fetchServerTime = async () => {
-    setLoadingTime(true);
+    setLoadingTime(true); // Ensure loading spinner appears on every fetch
     try {
       const response = await axios.get('http://localhost:3000/time', {
         headers: { Authorisation: 'mysecrettoken' },
@@ -45,15 +46,8 @@ function App() {
     }
   };
 
-  const formatTime = (seconds: number) => {
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
-    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-    const secs = String(seconds % 60).padStart(2, '0');
-    return `${hrs}:${mins}:${secs}`;
-  };
-
   const fetchMetrics = async () => {
-    setLoadingMetrics(true);
+    setLoadingMetrics(true); // Ensure loading spinner appears on every fetch
     try {
       const response = await axios.get('http://localhost:3000/metrics', {
         headers: { Authorisation: 'mysecrettoken' },
@@ -66,24 +60,35 @@ function App() {
     }
   };
 
+  const formatTime = (seconds: number) => {
+    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    return `${hrs}:${mins}:${secs}`;
+  };
+
   return (
     <div className="App">
-      <div className="section left-section">
-        {loadingTime ? (
-          <div className="loading">Loading...</div>
-        ) : (
+      <div className="section left-section loading-overlay">
+        {loadingTime && (
+          <div className="loading-spinner">
+            <ClipLoader color="#000" loading={loadingTime} size={50} />
+          </div>
+        )}
+        {!loadingTime && (
           <>
             <h2>Server Time: {serverTime}</h2>
             <h3>Time Difference: {formatTime(timeDifference)}</h3>
           </>
         )}
       </div>
-      <div className="section right-section">
-        {loadingMetrics ? (
-          <div className="loading">Loading...</div>
-        ) : (
-          <pre>{metrics}</pre>
+      <div className="section right-section loading-overlay">
+        {loadingMetrics && (
+          <div className="loading-spinner">
+            <ClipLoader color="#000" loading={loadingMetrics} size={50} />
+          </div>
         )}
+        {!loadingMetrics && <pre>{metrics}</pre>}
       </div>
     </div>
   );
