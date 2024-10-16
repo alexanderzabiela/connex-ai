@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
-    "esModuleInterop": true
+    "target": "ES6",                          // Specify ECMAScript target version
+    "module": "CommonJS",                     // Use CommonJS module system
+    "rootDir": ".",                           // Set the root directory for input files
+    "outDir": "dist",                         // Redirect output files to the 'dist' folder
+    "strict": true,                           // Enable all strict type-checking options
+    "esModuleInterop": true,                  // Enable compatibility with CommonJS modules
+    "moduleResolution": "node",               // Use Node.js module resolution algorithm
+    "skipLibCheck": true,                     // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
+    "types": ["node", "mocha", "chai"],       // Removed "chai-http" as it's now included in chai-http
+    "typeRoots": ["./node_modules/@types"],   // Specify folders with type definitions
+    "sourceMap": true                         // Generate source map files
   },
-  "include": ["src"]
+  "include": ["src", "test"],                 // Include 'src' and 'test' directories
+  "exclude": ["node_modules"]                 // Exclude 'node_modules' directory
 }
