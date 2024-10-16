@@ -6,9 +6,12 @@ function App() {
   const [serverTime, setServerTime] = useState<number | null>(null);
   const [timeDifference, setTimeDifference] = useState<number>(0);
   const [loadingTime, setLoadingTime] = useState<boolean>(false);
+  const [metrics, setMetrics] = useState<string>('');
+  const [loadingMetrics, setLoadingMetrics] = useState<boolean>(false);
 
   useEffect(() => {
     fetchServerTime();
+    fetchMetrics();
 
     const timeInterval = setInterval(() => {
       setTimeDifference((prev) => prev + 1);
@@ -16,6 +19,7 @@ function App() {
 
     const fetchInterval = setInterval(() => {
       fetchServerTime();
+      fetchMetrics();
     }, 30000);
 
     return () => {
@@ -48,6 +52,20 @@ function App() {
     return `${hrs}:${mins}:${secs}`;
   };
 
+  const fetchMetrics = async () => {
+    setLoadingMetrics(true);
+    try {
+      const response = await axios.get('http://localhost:3000/metrics', {
+        headers: { Authorisation: 'mysecrettoken' },
+      });
+      setMetrics(response.data);
+    } catch (error) {
+      console.error('Error fetching metrics:', error);
+    } finally {
+      setLoadingMetrics(false);
+    }
+  };
+
   return (
     <div className="App">
       <div className="section left-section">
@@ -61,7 +79,11 @@ function App() {
         )}
       </div>
       <div className="section right-section">
-        {/* Right section content */}
+        {loadingMetrics ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <pre>{metrics}</pre>
+        )}
       </div>
     </div>
   );
