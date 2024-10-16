@@ -18,6 +18,7 @@
     "prom-client": "^13.2.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.5",
     "ts-node": "^10.9.2",
