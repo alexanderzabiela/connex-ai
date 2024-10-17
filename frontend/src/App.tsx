@@ -32,7 +32,7 @@ function App() {
   const fetchServerTime = async () => {
     setLoadingTime(true); // Ensure loading spinner appears on every fetch
     try {
-      const response = await axios.get('http://localhost:3000/time', {
+      const response = await axios.get('http://localhost:5000/time', {
         headers: { Authorisation: 'mysecrettoken' },
       });
       const epochTime = response.data.epoch;
@@ -49,7 +49,7 @@ function App() {
   const fetchMetrics = async () => {
     setLoadingMetrics(true); // Ensure loading spinner appears on every fetch
     try {
-      const response = await axios.get('http://localhost:3000/metrics', {
+      const response = await axios.get('http://localhost:5000/metrics', {
         headers: { Authorisation: 'mysecrettoken' },
       });
       setMetrics(response.data);

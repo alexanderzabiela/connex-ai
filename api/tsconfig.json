@@ -9,10 +9,10 @@
     "moduleResolution": "node",               // Use Node.js module resolution algorithm
     "skipLibCheck": true,                     // Skip type checking of declaration files
     "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
-    "types": ["node", "mocha", "chai"],       // Removed "chai-http" as it's now included in chai-http
+    "types": ["node", "mocha", "chai"],       // Specify types for node, mocha, chai
     "typeRoots": ["./node_modules/@types"],   // Specify folders with type definitions
-    "sourceMap": true                         // Generate source map files
+    "sourceMap": true,                        // Generate source map files
+    "noEmit": true                            // No need to emit output files, Babel will handle this
   },
-  "include": ["src", "test"],                 // Include 'src' and 'test' directories
-  "exclude": ["node_modules"]                 // Exclude 'node_modules' directory
+  "include": ["src", "test"]                  // Include 'src' and 'test' directories
 }

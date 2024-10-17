@@ -1,0 +1,52 @@
+.
+├── api
+│   ├── Dockerfile
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   ├── test
+│   └── tsconfig.json
+├── docker-compose.yml
+├── file-structure.txt
+├── frontend
+│   ├── README.md
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   ├── src
+│   └── tsconfig.json
+├── node_modules
+│   ├── @babel
+│   ├── ansi-regex
+│   ├── ansi-styles
+│   ├── chalk
+│   ├── cliui
+│   ├── color-convert
+│   ├── color-name
+│   ├── concurrently
+│   ├── date-fns
+│   ├── emoji-regex
+│   ├── escalade
+│   ├── get-caller-file
+│   ├── has-flag
+│   ├── is-fullwidth-code-point
+│   ├── lodash
+│   ├── regenerator-runtime
+│   ├── require-directory
+│   ├── rxjs
+│   ├── shell-quote
+│   ├── spawn-command
+│   ├── string-width
+│   ├── strip-ansi
+│   ├── supports-color
+│   ├── tree-kill
+│   ├── tslib
+│   ├── wrap-ansi
+│   ├── y18n
+│   ├── yargs
+│   └── yargs-parser
+└── package.json
+
+39 directories, 11 files
